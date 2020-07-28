@@ -45,7 +45,7 @@ spec:
             secretKeyRef:
               name: drupal-mysql-secret
               key: MYSQL_USER
-    volumes:
+      volumes:
       - name: mysql-persistent-storage
         persistentVolumeClaim:
           claimName: drupal-mysql-pvc

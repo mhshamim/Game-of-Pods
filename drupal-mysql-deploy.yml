@@ -29,22 +29,25 @@ spec:
         - name: mysql-persistent-storage
           mountPath: /var/lib/mysql
           subPath: dbdata
-        env:
-        - name: MYSQL_ROOT_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: drupal-mysql-secret
-              key: MYSQL_ROOT_PASSWORD
-        - name: MYSQL_DATABASE
-          valueFrom:
-            secretKeyRef:
-              name: drupal-mysql-secret
-              key: MYSQL_DATABASE
-        - name: MYSQL_USER
-          valueFrom:
-            secretKeyRef:
-              name: drupal-mysql-secret
-              key: MYSQL_USER
+        envFrom:
+        - secretRef:
+          name: drupal-mysql-secret
+#        env:
+#        - name: MYSQL_ROOT_PASSWORD
+#          valueFrom:
+#            secretKeyRef:
+#              name: drupal-mysql-secret
+#              key: MYSQL_ROOT_PASSWORD
+#        - name: MYSQL_DATABASE
+#          valueFrom:
+#            secretKeyRef:
+#              name: drupal-mysql-secret
+#              key: MYSQL_DATABASE
+#        - name: MYSQL_USER
+#          valueFrom:
+#            secretKeyRef:
+#              name: drupal-mysql-secret
+#              key: MYSQL_USER
       volumes:
       - name: mysql-persistent-storage
         persistentVolumeClaim:

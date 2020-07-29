@@ -4,8 +4,7 @@ metadata:
   name: drupal-service
   labels:
     app: drupal
-    type: service
-    data: app
+    tier: frontend
 spec:
   ports:
   - port: 80

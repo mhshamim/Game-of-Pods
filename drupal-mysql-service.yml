@@ -3,14 +3,12 @@ kind: Service
 metadata:
   name: drupal-mysql-service
   labels:
-    app: drupal
-    type: service
-    data: mysql
+    app: drupal-mysql
+    tier: backend
 spec:
   ports:
   - name: mysql
     port: 3306
   type: ClusterIP
   selector:
-    app: drupal
-    data: mysql
+    app: drupal-mysql

@@ -3,22 +3,17 @@ kind: Deployment
 metadata:
   name: drupal-mysql
   labels:
-    app: drupal
-    type: deployment
-    data: mysql
+    app: drupal-mysql
+    tier: backend
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: drupal
-      type: deployment
-      data: mysql
+      app: drupal-mysql
   template:
     metadata:
       labels:
-        app: drupal
-        type: deployment
-        data: mysql
+        app: drupal-mysql
     spec:
       containers:
       - name: drupal-mysql

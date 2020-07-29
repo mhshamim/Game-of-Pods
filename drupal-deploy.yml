@@ -4,6 +4,7 @@ metadata:
   name: drupal
   labels:
     app: drupal
+    tier: frontend
 spec:
   replicas: 1
   selector:

@@ -31,7 +31,7 @@ spec:
           subPath: dbdata
         envFrom:
         - secretRef:
-          name: drupal-mysql-secret
+            name: drupal-mysql-secret
 #        env:
 #        - name: MYSQL_ROOT_PASSWORD
 #          valueFrom:

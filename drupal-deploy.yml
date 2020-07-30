@@ -22,29 +22,26 @@ spec:
         args: ['cp -r /var/www/html/sites/ /data/; chown www-data:www-data /data/ -R']
         volumeMounts:
         - name: drupal-persistent-storage
-		      mountPath: /data
-	    containers:
+          mountPath: /data
+      containers:
       - name: drupal
         image: drupal:8.6
         ports:
         - containerPort: 30095
         volumeMounts:
-		    - name: drupal-persistent-storage
-		      mountPath: /var/www/html/modules
+        - name: drupal-persistent-storage
+          mountPath: /var/www/html/modules
           subPath: modules
-	  	  volumeMounts:
-    		- name: drupal-persistent-storage
-	    	  mountPath: /var/www/html/profiles
+        - name: drupal-persistent-storage
+          mountPath: /var/www/html/profiles
           subPath: profiles
-	    	volumeMounts:
-	    	- name: drupal-persistent-storage
-		      mountPath: /var/www/html/sites
+        - name: drupal-persistent-storage
+          mountPath: /var/www/html/sites
           subPath: sites
-		    volumeMounts:
-	    	- name: drupal-persistent-storage
-	  	    mountPath: /var/www/html/themes
+        - name: drupal-persistent-storage
+          mountPath: /var/www/html/themes
           subPath: themes
-	    volumes:
+      volumes:
       - name: drupal-persistent-storage
         persistentVolumeClaim:
           claimName: drupal-pvc

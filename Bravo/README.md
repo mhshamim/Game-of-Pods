@@ -1,17 +1,3 @@
-# Game of Pods
-
-![KODEKLOUD](https://process.fs.teachablecdn.com/ADNupMnWyR7kCWRvm76Laz/resize=height:20/https://www.filepicker.io/api/file/OapjGZrUQRiPge9Kc2xu)
-
-
-Solution of the game to testing Kubernestes skills.
-
-  - Bravo
-  - Pento
-  - Redis Islands
-  - Tyro
-  - Voting App
-  - Iron Gallery
-
 ## Bravo
 
 Figure below explains the Drupal deployment:
@@ -19,7 +5,7 @@ Figure below explains the Drupal deployment:
 ![Figure-Bravo](https://github.com/mhshamim/Game-of-Pods/blob/master/scenarios/Game-of-Pods-Bravo-Deploy.JPG?raw=true)
 
 * [drupal-service](drupal-service.yml) : drupal service
-* [drupal](drupal-service.yml) : drupal frontend deployment
+* [drupal](drupal-deploy.yml) : drupal frontend deployment
 * [drupal-pvc](drupal-pvc.yml) : drupal persistent volume claim used by the deployment
 * [drupal-pv](drupal-pv-hostpath.yml) : persistent volume using hostpath
 * [drupal-mysql-service](drupal-mysql-service.yml) : drupal backend service exposing mysql deployment port
@@ -33,28 +19,44 @@ Figure below explains the Drupal deployment:
 
 Run all the required mentioned kubernetes app resources listed above:
 
-- Create the folders on kubernetes nodes for persistent volumes
+
+
+- Access modes: ReadWriteOnce
+- Volume Name: drupal-pv
+- Storage: 5Gi
+- Configure drupal-pv with hostPath = /drupal-data (create the directory on Worker Nodes)
+
 ```sh
 node01 $ mkdir /drupal-data
-node01 $ mkdir /drupal-mysql-data
-```
 
-- Create the persistent volume resources
-
-```sh
 master $ kubectl apply -f drupal-pv-hostpath.yml
 persistentvolume/drupal-pv created
+```
+
+- Volume Name: drupal-mysql-pv
+- Storage: 5Gi
+- Access modes: ReadWriteOnce
+- Configure drupal-mysql-pv with hostPath = /drupal-mysql-data (create the directory on Worker Nodes)
+
+```sh
+node01 $ mkdir /drupal-mysql-data
 
 master $ kubectl apply -f drupal-mysql-pv-hostpath.yml
 persistentvolume/drupal-mysql-pv created
 ```
 
-- Create persistent volume claim resources
+- Claim Name: drupal-pvc
+- Storage Request: 5Gi
+- Access modes: ReadWriteOnce
 
 ```sh
 master $ kubectl apply -f drupal-pvc.yml
 persistentvolumeclaim/drupal-pvc created
+```
 
+
+
+```sh
 master $ kubectl apply -f drupal-mysql-pvc.yml
 persistentvolumeclaim/drupal-mysql-pvc created
 ```
@@ -125,32 +127,4 @@ NAME                                           DESIRED   CURRENT   READY     AGE
 replicaset.extensions/drupal-75d8567f9         1         1         1         20s
 NAME                               READY     STATUS     RESTARTS   AGE
 pod/drupal-75d8567f9-xdtbc         1/1       Running    1          20s
-```
-
-
-## Pento
-
-Figure below explains the Pento setup:
-
-![Figure-Bravo](https://github.com/mhshamim/Game-of-Pods/blob/master/scenarios/Game-of-Pods-Pento-Deploy.JPG?raw=true)
-
-* [drupal-service](drupal-service.yml) : drupal service
-* [drupal](drupal-service.yml) : drupal frontend deployment
-* [drupal-pvc](drupal-pvc.yml) : drupal persistent volume claim used by the deployment
-* [drupal-pv](drupal-pv-hostpath.yml) : persistent volume using hostpath
-* [drupal-mysql-service](drupal-mysql-service.yml) : drupal backend service exposing mysql deployment port
-* [drupal-mysql](drupal-mysql-deploy.yml) : drupal backend deployment using mysql db
-* [drupal-mysql-secret](drupal-mysql-secret.yml) : mysql environment variables
-* [drupal-mysql-pvc](drupal-mysql-pvc.yml) : mysql persistent volume claim used by the deployment
-* [drupal-mysql-pv](drupal-mysql-pv-hostpath.yml) : persistent volume using hostpath
-
-
-### Configuration
-
-Run all the required mentioned kubernetes app resources listed above:
-
-- Create the folders on kubernetes nodes for persistent volumes
-```sh
-node01 $ mkdir /drupal-data
-node01 $ mkdir /drupal-mysql-data
 ```

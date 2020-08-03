@@ -15,5 +15,5 @@ Solution of the game to testing Kubernestes skills.
 
 | Solution | README |
 | ------ | ------ |
-| Bravo | [Bravo/README.md][PlDb] |
-| Pento | [Pento/README.md][PlGh] |
+| Bravo | [Bravo/README.md](Bravo/README.md) |
+| Pento | [Pento/README.md][Pento/README.md] |

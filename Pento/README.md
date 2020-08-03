@@ -2,7 +2,7 @@
 
 Figure below explains the Pento setup:
 
-![Figure-Bravo](scenarios/Game-of-Pods-Pento-Deploy.JPG)
+![Figure-Bravo](https://github.com/mhshamim/Game-of-Pods/blob/master/scenarios/Game-of-Pods-Pento-Deploy.JPG)
 
 * [gop-fs-service](gop-fileserver-service.yml) : FileServer Expose Service
 * [gop-fileserver](gop-fileserver-pod.yml) : FileServer Pod Deployment
@@ -14,7 +14,7 @@ Figure below explains the Pento setup:
 
 ### Master Node Troubleshooting
 
-> kubeconfig = /root/.kube/config, User = 'kubernetes-admin' Cluster: Server Port = '6443'
+- kubeconfig = /root/.kube/config, User = 'kubernetes-admin' Cluster: Server Port = '6443'
 
 ```sh
 master $ kubectl get nodes
@@ -29,7 +29,7 @@ clusters:
   name: kubernetes
 ```
 
-> Fix kube-apiserver. Make sure its running and healthy.
+- Fix kube-apiserver. Make sure its running and healthy.
 
 
 ```sh
@@ -45,7 +45,7 @@ spec:
     - --client-ca-file=/etc/kubernetes/pki/ca.crt
 ```
 
-> Master node: coredns deployment has image: 'k8s.gcr.io/coredns:1.3.1'
+- Master node: coredns deployment has image: 'k8s.gcr.io/coredns:1.3.1'
 
 ```sh
 
@@ -57,7 +57,7 @@ image: k8s.gcr.io/coredns:1.3.1
 
 ### Worker Node Troubleshooting
 
-> node01 is ready and can schedule pods?
+- node01 is ready and can schedule pods?
 
 ```sh
 master $ kubectl get nodes
@@ -76,10 +76,10 @@ node01    Ready     <none>    2h        v1.11.3
 
 ### Persistent Volume and Persistent Volume Claim setup for the file-server
 
-> Create new PersistentVolume = 'data-pv'
-> PersistentVolume = data-pv, accessModes = 'ReadWriteMany'
-> PersistentVolume = data-pv, hostPath = '/web'
-> PersistentVolume = data-pv, storage = '1Gi'
+- Create new PersistentVolume = 'data-pv'
+- PersistentVolume = data-pv, accessModes = 'ReadWriteMany'
+- PersistentVolume = data-pv, hostPath = '/web'
+- PersistentVolume = data-pv, storage = '1Gi'
 
 ```sh
 master $ kubectl apply -f data-pv-hostpath.yml
@@ -95,12 +95,12 @@ data-pvc   Bound     data-pv   1Gi        RWX                           19s
 
 ### File-Server pod deployment
 
-> Create a pod for fileserver, name: 'gop-fileserver'
-> pod: gop-fileserver image: 'kodekloud/fileserver'
-> pod: gop-fileserver mountPath: '/web'
-> pod: gop-fileserver volumeMount name: 'data-store'
-> pod: gop-fileserver persistent volume name: data-store
-> pod: gop-fileserver persistent volume claim used: 'data-pvc'
+- Create a pod for fileserver, name: 'gop-fileserver'
+- pod: gop-fileserver image: 'kodekloud/fileserver'
+- pod: gop-fileserver mountPath: '/web'
+- pod: gop-fileserver volumeMount name: 'data-store'
+- pod: gop-fileserver persistent volume name: data-store
+- pod: gop-fileserver persistent volume claim used: 'data-pvc'
 
 ```sh
 master $ kubectl apply -f gop-fileserver-pod.yml
@@ -110,10 +110,10 @@ pod/gop-fileserver created
 
 ### File-Server Expose Ports
 
-> New Service, name: 'gop-fs-service'
-> Service name: gop-fs-service, port: '8080'
-> Service name: gop-fs-service, targetPort: '8080'
-> Service name: gop-fs-service, NodePort: '31200'
+- New Service, name: 'gop-fs-service'
+- Service name: gop-fs-service, port: '8080'
+- Service name: gop-fs-service, targetPort: '8080'
+- Service name: gop-fs-service, NodePort: '31200'
 
 ```sh
 master $ kubectl apply -f gop-fileserver-service.yml

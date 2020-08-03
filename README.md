@@ -16,4 +16,5 @@ Solution of the game to testing Kubernestes skills.
 | Solution | README |
 | ------ | ------ |
 | Bravo | [Bravo/README.md](Bravo/README.md) |
-| Pento | [Pento/README.md][Pento/README.md] |
+| Pento | [Pento/README.md](Pento/README.md) |
+| Redis Islands | [Redis Islands/README.md](Redis Islands/README.md) |

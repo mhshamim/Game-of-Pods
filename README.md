@@ -3,6 +3,9 @@
 ![KODEKLOUD](https://process.fs.teachablecdn.com/ADNupMnWyR7kCWRvm76Laz/resize=height:20/https://www.filepicker.io/api/file/OapjGZrUQRiPge9Kc2xu)
 
 
+![Game-of-Pods](https://github.com/mhshamim/Game-of-Pods/blob/master/scenarios/Game-of-Pods.JPG)
+
+
 Solution of the game to testing Kubernestes skills.
 
   - Bravo

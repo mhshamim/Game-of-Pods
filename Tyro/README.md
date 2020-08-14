@@ -7,6 +7,7 @@ Figure below explains the Jekyll SSG:
 * [jekyll-pvc](jekyll-pvc.yml) : persistent volumes claim
 * [jekyll-pod](jekyll-pod.yml) : Pod manifest file
 * [jekyll-service](jekyll-node-service.yml) : Service NodePort
+* [developer-RBAC](developer-rbac.yml) : RBAC Config
 
 
 ## Configuration
@@ -82,4 +83,62 @@ service/jekyll created
 master $ kubectl get svc -n development
 NAME      TYPE       CLUSTER-IP    EXTERNAL-IP   PORT(S)          AGE
 jekyll    NodePort   10.104.91.1   <none>        8080:30097/TCP   10s
+```
+
+### RBAC Config
+
+#### Role
+'developer-role', should have all(*) permissions for services in development namespace
+'developer-role', should have all(*) permissions for persistentvolumeclaims in development namespace
+'developer-role', should have all(*) permissions for pods in development namespace
+
+#### Rolebinding
+create rolebinding = developer-rolebinding, role= 'developer-role', namespace = development
+rolebinding = developer-rolebinding associated with user = 'drogo'
+
+```sh
+master $ kubectl apply -f developer-rbac.yml
+role.rbac.authorization.k8s.io/developer-role created
+rolebinding.rbac.authorization.k8s.io/developer-rolebinding created
+```
+
+### User Certificate
+
+Certificate and key pair for user drogo is created under /root. Add this user to kubeconfig = /root/.kube/config, User = drogo, client-key = /root/drogo.key client-certificate = /root/drogo.crt
+Create a new context in the default config file (/root/.kube/config) called 'developer' with user = drogo and cluster = kubernetes
+
+
+```sh
+master $ openssl genrsa -out drogo.key 2048
+Generating RSA private key, 2048 bit long modulus
+.................................................................+++
+....................................................................................................................................................................................................+++
+e is 65537 (0x10001)
+
+master $ openssl req -new -key drogo.key -out drogo.csr -subj "/CN=drogo/O=developer"
+
+master $ openssl x509 -req -in drogo.csr -CA /etc/kubernetes/pki/ca.crt -CAkey /etc/kubernetes/pki/ca.key -CAcreateserial -out drogo.crt -days 500
+Signature ok
+subject=/CN=drogo/O=developer
+Getting CA Private Key
+
+master $ kubectl config set-credentials drogo --client-certificate=/root/drogo.crt  --client-key=/root/drogo.key
+User "drogo" set.
+```
+
+### Kube Config
+
+set context 'developer' with user = 'drogo' and cluster = 'kubernetes' as the current context.
+
+```sh
+master $ kubectl config set-context developer --user=drogo --cluster=kubernetes --namespace=development
+Context "developer" created.
+
+master $ kubectl config use-context developer --user=drogo --cluster=kubernetes
+Switched to context "developer".
+
+master $ kubectl config get-contexts
+CURRENT   NAME                          CLUSTER      AUTHINFO           NAMESPACE
+*         developer                     kubernetes   drogo
+          kubernetes-admin@kubernetes   kubernetes   kubernetes-admin
 ```

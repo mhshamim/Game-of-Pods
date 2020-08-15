@@ -112,8 +112,8 @@ Create a new context in the default config file (/root/.kube/config) called 'dev
 ```sh
 master $ openssl genrsa -out drogo.key 2048
 Generating RSA private key, 2048 bit long modulus
-.................................................................+++
-....................................................................................................................................................................................................+++
+..............................................+++
+..............................................+++
 e is 65537 (0x10001)
 
 master $ openssl req -new -key drogo.key -out drogo.csr -subj "/CN=drogo/O=developer"

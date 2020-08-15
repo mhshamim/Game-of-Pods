@@ -10,9 +10,9 @@ Figure below explains the Voting App architecture:
 * [worker-deployment](worker-deployment.yml) : Worker Deployment manifest
 * [Postgres-db](db-app.yml) : Postgres DB with Service, ConfigMap and Deployment manifest
 * [result-app](result-app.yml) : Result App with Service and Deployment manifest
-\
-\
 
+
+\
 Create a new namespace: name = 'vote'
 
 ```sh
@@ -28,13 +28,13 @@ Create a new service: name = vote-service \
 port = '5000' \
 targetPort = '80' \
 nodePort= '31000' \
-service endpoint exposes deployment 'vote-deployment' \
+service endpoint exposes deployment 'vote-deployment'  
 
 ### Vote Deployment
 
 Create a deployment: name = 'vote-deployment' \
 image = 'kodekloud/examplevotingapp_vote:before' \
-status: 'Running' \
+status: 'Running'  
 
 ```sh
 master $ kubectl apply -f vote-app.yml
@@ -50,7 +50,7 @@ New Service, name = 'redis' \
 port: '6379' \
 targetPort: '6379' \
 type: 'ClusterIP' \
-service endpoint exposes deployment 'redis-deployment' \
+service endpoint exposes deployment 'redis-deployment'  
 
 ### Redis Deployment
 
@@ -59,7 +59,7 @@ image: 'redis:alpine' \
 Volume Type: 'EmptyDir' \
 Volume Name: 'redis-data' \
 mountPath: '/data' \
-status: 'Running' \
+status: 'Running'  
 
 ```sh
 master $ kubectl apply -f redis-app.yml
@@ -73,7 +73,7 @@ deployment.apps/redis-deployment created
 
 Create new deployment. name: 'worker' \
 image: 'kodekloud/examplevotingapp_worker' \
-status: 'Running' \
+status: 'Running'  
 
 ```sh
 master $ kubectl apply -f worker-deployment.yml
@@ -88,7 +88,7 @@ deployment.apps/worker created
 Create new service: 'db' \
 port: '5432' \
 targetPort: '5432' \
-type: 'ClusterIP' \
+type: 'ClusterIP'  
 
 ### DB Deployment
 
@@ -97,7 +97,7 @@ image: 'postgres:9.4' \
 Volume Type: 'EmptyDir' \
 Volume Name: 'db-data' \
 mountPath: '/var/lib/postgresql/data' \
-status: 'Running' \
+status: 'Running'  
 
 ```sh
 master $ kubectl apply -f db-app.yml
@@ -114,25 +114,24 @@ deployment.apps/db-deployment created
 
 Create new deployment, name: 'result-deployment' \
 image: 'kodekloud/examplevotingapp_result:before' \
-status: 'Running' \
+status: 'Running'  
 
 ### Result Service
 
 service 'result-service' endpoint exposes deployment 'result-deployment' \
 port: '5001' \
 targetPort: '80' \
-NodePort: '31001' \
+NodePort: '31001'  
 
 ```sh
 master $ kubectl apply -f result-app.yml
 service/result created
 deployment.apps/result-deployment created
 ```
-\
-\
+
 
 ## Running Deployments
-\
+
 ```sh
 master $ kubectl get deploy,pod,svc -n vote
 NAME                                      DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE

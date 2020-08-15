@@ -16,7 +16,7 @@ Solution of the game to testing Kubernestes skills.
   - Iron Gallery
 
 
-| Solution | README |
+| Solution | HOW-TOs |
 | ------ | ------ |
 | Bravo | [Bravo/README.md](Bravo/README.md) |
 | Pento | [Pento/README.md](Pento/README.md) |

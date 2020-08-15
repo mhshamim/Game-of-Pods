@@ -22,3 +22,5 @@ Solution of the game to testing Kubernestes skills.
 | Pento | [Pento/README.md](Pento/README.md) |
 | Redis Islands | [Redis-Islands/README.md](Redis-Islands/README.md) |
 | Tyro | [Tyro/README.md](Tyro/README.md) |
+| Voting App | [Voting-App/README.md](Voting-App/README.md) |
+| Iron Gallery | [Iron Gallery/README.md](Iron-Gallery/README.md) |

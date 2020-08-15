@@ -27,7 +27,7 @@ kube-system   Active    56m
 
 ### Persistent Volume
 
-jekyll-pv is already created. Inspect it before you create the pvc
+jekyll-pv is already created. Inspect it before you create the pvc \
 PV is using hostpath '/site'
 
 ```sh
@@ -38,8 +38,8 @@ jekyll-site   1Gi        RWX            Retain           Available              
 
 ### Persistent Volume Claim
 
-Storage Request: 1Gi
-Access modes: ReadWriteMany
+Storage Request: 1Gi\
+Access modes: ReadWriteMany\
 pvc name = jekyll-site, namespace development
 
 ```sh
@@ -53,11 +53,11 @@ jekyll-site   Bound     jekyll-site   1Gi        RWX                           2
 
 ### Pod Config
 
-pod: 'jekyll' has an initContainer, name: 'copy-jekyll-site', image: 'kodekloud/jekyll'
-initContainer: 'copy-jekyll-site' command: [ "jekyll", "new", "/site" ] (command to run: jekyll new /site)
-pod: 'jekyll', initContainer: 'copy-jekyll-site', volume name = site, mountPath = /site
-pod: 'jekyll', container: 'jekyll', image = kodekloud/jekyll-serve, volume name = site, mountPath = /site
-pod: 'jekyll', uses volume called 'site' with pvc = 'jekyll-site'
+pod: 'jekyll' has an initContainer, name: 'copy-jekyll-site', image: 'kodekloud/jekyll' \
+initContainer: 'copy-jekyll-site' command: [ "jekyll", "new", "/site" ] (command to run: jekyll new /site) \
+pod: 'jekyll', initContainer: 'copy-jekyll-site', volume name = site, mountPath = /site \
+pod: 'jekyll', container: 'jekyll', image = kodekloud/jekyll-serve, volume name = site, mountPath = /site \
+pod: 'jekyll', uses volume called 'site' with pvc = 'jekyll-site' \
 pod: 'jekyll', uses label 'run=jekyll'
 
 ```sh
@@ -71,9 +71,9 @@ jekyll    1/1       Running   0          51s
 
 ### Service NodePort
 
-Service 'jekyll' uses targetPort: '4000' , namespace: 'development'
-Service 'jekyll' uses Port: '8080' , namespace: 'development'
-Service 'jekyll' uses NodePort: '30097' , namespace: 'development'
+Service 'jekyll' uses targetPort: '4000' , namespace: 'development' \
+Service 'jekyll' uses Port: '8080' , namespace: 'development' \
+Service 'jekyll' uses NodePort: '30097' , namespace: 'development' \
 Service 'jekyll' uses selector: 'run=jekyll' (for pod: jekyll) , namespace: 'development'
 
 ```sh
@@ -88,12 +88,12 @@ jekyll    NodePort   10.104.91.1   <none>        8080:30097/TCP   10s
 ### RBAC Config
 
 #### Role
-'developer-role', should have all(*) permissions for services in development namespace
-'developer-role', should have all(*) permissions for persistentvolumeclaims in development namespace
+'developer-role', should have all(*) permissions for services in development namespace \
+'developer-role', should have all(*) permissions for persistentvolumeclaims in development namespace \
 'developer-role', should have all(*) permissions for pods in development namespace
 
 #### Rolebinding
-create rolebinding = developer-rolebinding, role= 'developer-role', namespace = development
+create rolebinding = developer-rolebinding, role= 'developer-role', namespace = development \
 rolebinding = developer-rolebinding associated with user = 'drogo'
 
 ```sh
@@ -104,7 +104,8 @@ rolebinding.rbac.authorization.k8s.io/developer-rolebinding created
 
 ### User Certificate
 
-Certificate and key pair for user drogo is created under /root. Add this user to kubeconfig = /root/.kube/config, User = drogo, client-key = /root/drogo.key client-certificate = /root/drogo.crt
+Certificate and key pair for user drogo is created under /root. \
+Add this user to kubeconfig = /root/.kube/config, User = drogo, client-key = /root/drogo.key client-certificate = /root/drogo.crt \
 Create a new context in the default config file (/root/.kube/config) called 'developer' with user = drogo and cluster = kubernetes
 
 

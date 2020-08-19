@@ -92,9 +92,23 @@ jekyll    NodePort   10.104.91.1   <none>        8080:30097/TCP   10s
 'developer-role', should have all(*) permissions for persistentvolumeclaims in development namespace \
 'developer-role', should have all(*) permissions for pods in development namespace
 
+> Using Imperative Command
+
+```sh
+kubectl create role developer-role --resource=pods,svc,pvc --verb="*" --namespace=development
+```
+
 #### Rolebinding
 create rolebinding = developer-rolebinding, role= 'developer-role', namespace = development \
 rolebinding = developer-rolebinding associated with user = 'drogo'
+
+> Using Imperative Command
+
+```sh
+kubectl create rolebinding developer-rolebinding --role=developer-role --user=drogo --namespace=development
+```
+
+> Using Declarative Command
 
 ```sh
 master $ kubectl apply -f developer-rbac.yml
@@ -135,7 +149,7 @@ set context 'developer' with user = 'drogo' and cluster = 'kubernetes' as the cu
 master $ kubectl config set-context developer --user=drogo --cluster=kubernetes --namespace=development
 Context "developer" created.
 
-master $ kubectl config use-context developer --user=drogo --cluster=kubernetes
+master $ kubectl config use-context developer
 Switched to context "developer".
 
 master $ kubectl config get-contexts

@@ -71,10 +71,10 @@ jekyll    1/1       Running   0          51s
 
 ### Service NodePort
 
-Service 'jekyll' uses targetPort: '4000' , namespace: 'development' \
-Service 'jekyll' uses Port: '8080' , namespace: 'development' \
-Service 'jekyll' uses NodePort: '30097' , namespace: 'development' \
-Service 'jekyll' uses selector: 'run=jekyll' (for pod: jekyll) , namespace: 'development'
+Service 'jekyll' uses `targetPort: '4000'` , namespace: 'development' \
+Service 'jekyll' uses `Port: '8080'` , namespace: 'development' \
+Service 'jekyll' uses `NodePort: '30097'` , namespace: 'development' \
+Service 'jekyll' uses `selector: 'run=jekyll'` (for pod: jekyll) , namespace: 'development'
 
 ```sh
 master $ kubectl apply -f jekyll-node-service.yml

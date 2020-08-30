@@ -14,7 +14,7 @@ Figure below explains the Jekyll SSG:
 
 ### Namespace
 
-namspace called 'development' has already been created. Inspect it.
+namspace called `development` has already been created. Inspect it.
 
 ```sh
 master $ kubectl get ns
@@ -28,7 +28,7 @@ kube-system   Active    56m
 ### Persistent Volume
 
 jekyll-pv is already created. Inspect it before you create the pvc \
-PV is using hostpath '/site'
+PV is using hostpath `/site`
 
 ```sh
 master $ kubectl get pv
@@ -88,9 +88,9 @@ jekyll    NodePort   10.104.91.1   <none>        8080:30097/TCP   10s
 ### RBAC Config
 
 #### Role
-'developer-role', should have all(*) permissions for services in development namespace \
-'developer-role', should have all(*) permissions for persistentvolumeclaims in development namespace \
-'developer-role', should have all(*) permissions for pods in development namespace
+`developer-role`, should have all(*) permissions for services in development namespace \
+`developer-role`, should have all(*) permissions for persistentvolumeclaims in development namespace \
+`developer-role`, should have all(*) permissions for pods in development namespace
 
 > Using Imperative Command
 
@@ -143,7 +143,7 @@ User "drogo" set.
 
 ### Kube Config
 
-set context 'developer' with user = 'drogo' and cluster = 'kubernetes' as the current context.
+set context `developer` with user = `drogo` and cluster = `kubernetes` as the current context.
 
 ```sh
 master $ kubectl config set-context developer --user=drogo --cluster=kubernetes --namespace=development
